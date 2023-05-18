@@ -1,0 +1,242 @@
+---
+title: "Evidencia 1"
+author: "Pedro Sotelo Arce A01285371"
+date: "2023-04-29"
+output:
+  word_document: default
+  html_document: default
+---
+
+__Parte #1 Investigacion__
+
+__Investiga, ¿Cuál es la situación actual de COVID-19 a nivel mundial, en México, en tu estado de origen y en tu municipio, alcaldía o colonia?__
+
+Actualmente la situación con el COVID-19 se ha tranquilizado y establecido a comparación del pánico que se vivió hace tres años cuando la pandemia tomó por sorpresa a todo el mundo, el virus ya se ha establecido y es algo que llego para quedase, esto por una variedad de razones, las cuales no vale la pena profundizar ya que no es el proposito de este escrito, como decia, actualmente la situacion se ha tranquilizado, pero sigue habiendo una tasa de mortalidad relativamente alta, en  los ultimos 28 dias se diagnosticaron 4 millones de casos y hubo 28 mil muertes a causa del virus, se administraron 28 millones de vacunas, observando las graficas de la pagina de Johns Hopkins podemos observar que tanto las muertes como los casos van en declive, aunque pasa algo muy curioso en la grafica de los casos, ya que en enero 30, hubo un pico masivo de 168 millones de casos, pero a partir de ahi la tendencia va en descenso, ahora en vez de hablar del mundo, hablemos del pais, Mexico realmente tomó muchas malas decisiones a la hora de combatir el COVID-19, en el ultimo mes se registraron poco mas de 80 mil casos y 600 muertes, comparado con los estados unidos donde se registraron 900 mil casos en el ultimo mes y mas de 9 mil muertes, parece que a Mexico le esta yendo bien, pero es cuestion de mirar paises como CHINA, que ya estan libres de contagios casi por completo, para darnos cuenta que no estamos tan bien como pensabamos, pero tampoco somos los peores ni de cerca. Enfocándonos más en lo que me rodea, el estado, municipio, realmente ya no se exige el uso de cubrebocas en casi ningún lado, realmente no hay ningún tipo de protección que haga que disminuyan los casos, y no parece haber esfuerzos por parte del gobierno para disminuir los casos. 
+
+__¿Cuál fue la primera variante del virus que se propagó a todo el mundo?__
+
+La primera variante de COVID que se esparce por todo el mundo iniciando la era de la pandemia mundial que nos tocó vivir, es conocida como linaje 19A, esta variante fue identificada en China, concretamente en Hubei, en la ciudad de Wuhan, a finales del año 2019, y ahí fue donde empezaron los brotes y los rumores absurdos como el de la sopa de murciélago. De ahí todo fue esparciéndose, hasta que en Marzo 2020 nos dijeron que no iba a haber clases 2 semanas porque una nueva enfermedad contagiosa estaba rondando, esas semanas se transformaron en meses, y luego en AÑOS, pero ahora ya estamos en una situación un poco más estable. 
+
+¿Cuáles son las otras variantes del virus que existen en otras regiones del mundo?
+
+A lo largo de la pandemia surgieron muchas variantes del COVID-19 en diferentes partes del mundo, denominadas por la OMS usando la nomenclatura usando el abecedario griego, la primera siendo Alpha (B.1.1.7) esta variante se encontró por primera vez en el reino unido, la Beta (B.1.351) esta fue identificada por primera vez en sudáfrica, Gamma (P.1) identificada por primera vez en Japón y Brasil, y Delta (B.1.617.2) identificada por primera vez en la India. 
+__¿Cómo buscarías información de la variante del virus en tu país?__ 
+
+
+Realmente la mejor forma de buscar información acerca de qué variantes de virus, si lo que estoy buscando son secuencias de nucleótidos o el genoma, usar bases de datos oficiales como NCBI, pero si lo que quiero es saber mas del virus, puedo buscar en internet en páginas confiables como la del gobierno de México, o de la OMS o incluso el IMSS, páginas que son confiables para este tipo de información, además de que muchas además de incluir información sobre el virus incluyen maneras y recomendaciones para prevenirlo. 
+
+
+__Imagina que te encuentras en una situación similar a la de Li Wenliang, médico chino que intentó alertar sobre el brote de coronavirus en su país, pero fue detenido por las autoridades y obligado a retractarse, ¿qué harías en su caso? Selecciona un inciso:a) Lo reportas al centro de investigación o la universidad. b) Lo reportas a la prensa. c) Guardas la información. Elige y justifica tu respuesta. __
+
+
+Si yo estuviera en la situación de Li Wenliang probablemente lo reportará al centro de investigación o la universidad, ya que al dárselo a los medios pueden causar pánico desmesurado como se ve en la película de “Don't Look Up”, y al darlo a la universidad se podría corroborar y crear un reporte más completo para dar información a las autoridades para que escuchen y comprendan la situación y puedan tomar acciones al respecto. 
+
+#Variantes de COVID
+#Alfa B.1.1.7 - varianteAlfa
+#Beta B.1.351 - varianteBeta
+#Delta B.1.617.2 - varianteDelta
+#Omnicron B.1.1.529 - varianteOmnicron
+#Eta B.1.525 - varianteEta
+#Zeta P.2 - varianteZeta
+#Lambda C.37 - varianteLambda
+#Delta Plus AY.1 - varianteDeltaplus
+#B.1.1.318 - variable9
+#originalWuhan
+
+```{r}
+
+library(seqinr)
+library(ggplot2)
+
+print("Variante Alfa B.1.1.7")
+variante_alfa = read.fasta("varianteAlfa.fasta")
+cat("Tamaño de la secuencia: ", length(variante_alfa[[1]]))
+#grafica
+cat("Secuencia original (Primeros 75): ", head((variante_alfa[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((variante_alfa[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(variante_alfa[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(variante_alfa[[1]]),75))
+
+
+
+```
+
+
+```{r}
+
+print("Variante Beta B.1.351")
+variante_beta = read.fasta("varianteBeta.fasta")
+cat("Tamaño de la secuencia: ", length(variante_beta[[1]]))
+#grafica
+cat("Porcentaje de GC: ", GC(variante_beta[[1]],2)*100,"%")
+cat("Secuencia original (Primeros 75): ", head((variante_beta[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((variante_beta[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(variante_beta[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(variante_beta[[1]]),75))
+
+
+
+```
+
+
+```{r}
+
+print("Variante Delta B.1.617.2")
+variante_delta = read.fasta("varianteDelta.fasta")
+cat("Tamaño de la secuencia: ", length(variante_delta[[1]]))
+#grafica
+cat("Porcentaje de GC: ", GC(variante_delta[[1]],2)*100,"%")
+cat("Secuencia original (Primeros 75): ", head((variante_delta[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((variante_delta[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(variante_delta[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(variante_delta[[1]]),75))
+
+
+
+```
+
+
+
+```{r}
+print("Variante Omnicron B.1.1.529")
+variante_omnicron = read.fasta("varianteOmnicron.fasta")
+cat("Tamaño de la secuencia: ", length(variante_omnicron[[1]]))
+#grafica
+cat("Porcentaje de GC: ", GC(variante_omnicron[[1]],2)*100,"%")
+cat("Secuencia original (Primeros 75): ", head((variante_omnicron[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((variante_omnicron[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(variante_omnicron[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(variante_omnicron[[1]]),75))
+
+
+
+```
+
+
+```{r}
+print("Variante Eta B.1.525")
+variante_eta = read.fasta("varianteEta.fasta")
+cat("Tamaño de la secuencia: ", length(variante_eta[[1]]))
+#grafica
+cat("Porcentaje de GC: ", GC(variante_eta[[1]],2)*100,"%")
+cat("Secuencia original (Primeros 75): ", head((variante_eta[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((variante_eta[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(variante_eta[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(variante_eta[[1]]),75))
+
+
+```
+
+
+
+```{r}
+
+print("Variante Zeta P.2")
+variante_zeta = read.fasta("varianteZeta.fasta")
+cat("Tamaño de la secuencia: ", length(variante_zeta[[1]]))
+#grafica
+cat("Porcentaje de GC: ", GC(variante_zeta[[1]],2)*100,"%")
+cat("Secuencia original (Primeros 75): ", head((variante_zeta[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((variante_zeta[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(variante_zeta[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(variante_zeta[[1]]),75))
+
+
+
+```
+
+
+```{r}
+
+print("Variante Lambda C.37")
+variante_lambda = read.fasta("varianteLambda.fasta")
+cat("Tamaño de la secuencia: ", length(variante_lambda[[1]]))
+#grafica
+cat("Porcentaje de GC: ", GC(variante_lambda[[1]],2)*100,"%")
+cat("Secuencia original (Primeros 75): ", head((variante_lambda[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((variante_lambda[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(variante_lambda[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(variante_lambda[[1]]),75))
+
+
+```
+
+
+
+```{r}
+
+print("Variante Delta Plus AY.1")
+variante_deltaplus = read.fasta("varianteDeltaplus.fasta")
+cat("Tamaño de la secuencia: ", length(variante_deltaplus[[1]]))
+#grafica
+cat("Porcentaje de GC: ", GC(variante_deltaplus[[1]],2)*100,"%")
+cat("Secuencia original (Primeros 75): ", head((variante_deltaplus[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((variante_deltaplus[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(variante_deltaplus[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(variante_deltaplus[[1]]),75))
+
+
+
+```
+
+
+
+```{r}
+
+print("Variante B.1.1.318")
+variante_9 = read.fasta("variante9.fasta")
+cat("Tamaño de la secuencia: ", length(variante_9[[1]]))
+#grafica
+cat("Porcentaje de GC: ", GC(variante_9[[1]],2)*100,"%")
+cat("Secuencia original (Primeros 75): ", head((variante_9[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((variante_9[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(variante_9[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(variante_9[[1]]),75))
+
+
+
+```
+
+
+
+```{r}
+
+print("Variante original Wuhan")
+og_wuhan = read.fasta("OriginalWuhan.fasta")
+cat("Tamaño de la secuencia: ", length(og_wuhan[[1]]))
+#grafica
+cat("Porcentaje de GC: ", GC(og_wuhan[[1]],2)*100,"%")
+cat("Secuencia original (Primeros 75): ", head((og_wuhan[[1]]),75))
+cat("Secuencia original (Ultimos 75): ",tail((og_wuhan[[1]]),75))
+cat("sequencia complementaria (Primeros 75):",head(comp(og_wuhan[[1]]),75))
+cat("sequencia complementaria (Ultimos 75):",tail(comp(og_wuhan[[1]]),75))
+
+
+
+```
+
+
+En la siguiente grafica podemos observar una comparacion de las bases de ADN que componen el cada variante del virus, como se puede observar todas las variantes contienen una muy notable concentracion en "A y T", llegando la mayoria a los 10,000, componiendo 1/3 o en este caso 2/3 del total del ADN, ya que en promedio las secuencias tenian una longitud de 29,000, esto implica que este tipo de cadenas son ricas en pares adenina-timina, esto tambien puede afectar a la estabilidad de la estructura de doble helice asi como a su capacidad de interactuar con otras moleculas 
+
+Analizando un poco mas en especifico el caso de las variantes de COVID con las que estamos trabajando, la precencia de tantos T y A puede ser indicador de una mutacion, tambien importante aclarar que una concentracion mayor de A y T no necesariamente quiere decir que la enfermedad es muy infecciosa o virulenta.
+
+```{r}
+
+alfa_count <- count(variante_alfa[[1]], 1)
+beta_count <- count(variante_beta[[1]], 1)
+delta_count <- count(variante_delta[[1]], 1)
+omnicron_count <- count(variante_omnicron[[1]], 1)
+zeta_count <- count(variante_zeta[[1]], 1)
+eta_count <- count(variante_eta[[1]], 1)
+deltaplus_count <- count(variante_deltaplus[[1]], 1)
+nueve_count <- count(variante_9[[1]], 1)
+lambda_count <- count(variante_lambda[[1]], 1)
+wuhan_count <- count(og_wuhan[[1]], 1)
+
+counts_matrix <- rbind(wuhan_count, alfa_count, beta_count, delta_count, omnicron_count, zeta_count, eta_count, deltaplus_count, nueve_count, lambda_count)
+barplot(counts_matrix, beside = TRUE, col = c("blue", "red", "green", "orange", "purple", "pink", "black", "grey", "yellow", "magenta"),
+        ylim = c(0, 10000),
+        args.legend = list(x = 52.5, bty = "n", cex = 0.8, x.intersp = 0.25, y.intersp = 1.5),
+        legend.text = c("Wuhan", "Alfa", "Beta", "Delta", 'Omni', "Zeta", "Eta", "DeltaP", "v9", "Lambda"))
+```
+

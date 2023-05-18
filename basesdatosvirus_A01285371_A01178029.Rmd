@@ -1,0 +1,269 @@
+---
+title: "Basesdatosvirus"
+author: "Pedro Sotelo Arce y Leonardo Pequeño Moreno"
+date: "2023-04-24"
+output:
+  word_document: default
+  html_document: default
+---
+
+Zika virus
+```{r}
+library(seqinr)
+library(ggplot2)
+
+cat("Zika")
+zika = read.fasta("zika.fasta")
+cat("Tamaño de la secuencia: ")
+length(zika[[1]])
+cat("Composicion de nucleotidos: ")
+count(zika[[1]],1)
+cat("Contenido GC: ")
+GC(zika[[1]],2)
+cat("virus original(zika): ",head((zika[[1]]),40))
+cat("virus original (zika, final): ",tail((zika[[1]]),40))
+cat("sequencia complementaria(zika):",head(comp(zika[[1]]),40))
+cat("sequencia complementaria(zika, final):",tail(comp(zika[[1]]),40))
+
+
+```
+
+SARS coronavirus
+
+```{r}
+cat("Sarscovid")
+sarscovid = read.fasta("sarscovid.fasta")
+cat("Tamaño de la secuencia: ")
+length(sarscovid[[1]])
+cat("Composicion de nucleotidos: ")
+count(sarscovid[[1]],1)
+cat("Contenido GC: ")
+GC(sarscovid[[1]],2)
+cat("virus original(sarscovid): ",head((sarscovid[[1]]),40))
+cat("virus original (sarscovid, final): ",tail((sarscovid[[1]]),40))
+cat("sequencia complementaria(sarscovid):",head(comp(sarscovid[[1]]),40))
+cat("sequencia complementaria(sarscovid, final):",tail(comp(sarscovid[[1]]),40))
+
+```
+
+Wuhan seafood market pneumonia virus isolate Wuhan-Hu-1
+
+```{r}
+cat("Wuhan")
+wuhan = read.fasta("wuhan.fasta")
+cat("Tamaño de la secuencia: ")
+length(wuhan[[1]])
+cat("Composicion de nucleotidos: ")
+count(wuhan[[1]],1)
+cat("Contenido GC: ")
+GC(wuhan[[1]],2)
+cat("virus original(wuhan): ",head((wuhan[[1]]),40))
+cat("virus original (wuhan, final): ",tail((wuhan[[1]]),40))
+cat("sequencia complementaria(wuhan):",head(comp(wuhan[[1]]),40))
+cat("sequencia complementaria(wuhan, final):",tail(comp(wuhan[[1]]),40))
+
+
+```
+
+
+Middle East respiratory syndrome coronavirus
+
+```{r}
+cat("MERS")
+mers = read.fasta("mers.fasta")
+cat("Tamaño de la secuencia: ")
+length(mers[[1]])
+cat("Composicion de nucleotidos: ")
+count(mers[[1]],1)
+cat("Contenido GC: ")
+GC(mers[[1]],2)
+cat("virus original(mers): ",head((mers[[1]]),40))
+cat("virus original (mers, final): ",tail((mers[[1]]),40))
+cat("sequencia complementaria(mers):",head(comp(mers[[1]]),40))
+cat("sequencia complementaria(mers, final):",tail(comp(mers[[1]]),40))
+
+
+```
+
+
+DENGUE TIPO 1
+```{r}
+cat("Dengue tipo 1")
+dengue = read.fasta("dengue.fasta")
+cat("Tamaño de la secuencia: ")
+length(dengue[[1]])
+cat("Composicion de nucleotidos: ")
+count(dengue[[1]],1)
+cat("Contenido GC: ")
+GC(dengue[[1]],2)
+cat("virus original(dengue): ",head((dengue[[1]]),40))
+cat("virus original (dengue, final): ",tail((dengue[[1]]),40))
+cat("sequencia complementaria(dengue):",head(comp(dengue[[1]]),40))
+cat("sequencia complementaria(dengue, final):",tail(comp(dengue[[1]]),40))
+
+
+```
+
+
+GRAFICO
+```{r}
+graph<-data.frame(
+  nombre=rep(c("Zika", "Sars Coronavirus", "Mers","Wuhan",
+               "Dengue"),each=4),
+  nucleotido=rep(c("A","C","G",
+                   "T"),5),
+  Freq=c(count(zika[[1]],1), count(sarscovid[[1]],1),
+         count(mers[[1]],1), count(wuhan[[1]],1),
+         count(dengue[[1]],1))
+)
+
+ggplot(data = graph) +
+  geom_bar(aes(x=nombre, y=Freq, fill=nucleotido),
+           position="dodge",stat="identity")
+
+```
+
+PB2
+
+```{r}
+cat("PB2")
+PB2 = read.fasta("PB2.fasta")
+cat("Tamaño de la secuencia: ")
+length(PB2[[1]])
+cat("Composicion de nucleotidos: ")
+count(PB2[[1]],1)
+cat("Contenido GC: ")
+GC(PB2[[1]],2)
+cat("virus original(PB2): ",head((PB2[[1]]),40))
+cat("virus original (PB2, final): ",tail((PB2[[1]]),40))
+cat("sequencia complementaria(PB2):",head(comp(PB2[[1]]),40))
+cat("sequencia complementaria(PB2, final):",tail(comp(PB2[[1]]),40))
+
+
+```
+
+
+PB1
+```{r}
+
+cat("PB1")
+PB1 = read.fasta("PB1.fasta")
+cat("Tamaño de la secuencia: ")
+length(PB1[[1]])
+cat("Composicion de nucleotidos: ")
+count(PB1[[1]],1)
+cat("Contenido GC: ")
+GC(PB1[[1]],2)
+cat("virus original(PB1): ",head((PB1[[1]]),40))
+cat("virus original (PB1, final): ",tail((PB1[[1]]),40))
+cat("sequencia complementaria(PB1):",head(comp(PB1[[1]]),40))
+cat("sequencia complementaria(PB1, final):",tail(comp(PB1[[1]]),40))
+
+```
+
+PA
+```{r}
+
+cat("PA")
+PA = read.fasta("PA.fasta")
+cat("Tamaño de la secuencia: ")
+length(PA[[1]])
+cat("Composicion de nucleotidos: ")
+count(PA[[1]],1)
+cat("Contenido GC: ")
+GC(PA[[1]],2)
+cat("virus original(PA): ",head((PA[[1]]),40))
+cat("virus original (PA, final): ",tail((PA[[1]]),40))
+cat("sequencia complementaria(PA):",head(comp(PA[[1]]),40))
+cat("sequencia complementaria(PA, final):",tail(comp(PA[[1]]),40))
+
+```
+
+HA
+```{r}
+
+cat("HA")
+HA = read.fasta("HA.fasta")
+cat("Tamaño de la secuencia: ")
+length(HA[[1]])
+cat("Composicion de nucleotidos: ")
+count(HA[[1]],1)
+cat("Contenido GC: ")
+GC(HA[[1]],2)
+cat("virus original(HA): ",head((HA[[1]]),40))
+cat("virus original (HA, final): ",tail((HA[[1]]),40))
+cat("sequencia complementaria(HA):",head(comp(HA[[1]]),40))
+cat("sequencia complementaria(HA, final):",tail(comp(HA[[1]]),40))
+
+```
+
+NP
+```{r}
+H1N15 = read.fasta("H1N15.fasta")
+print("Tamaño de la secuencia")
+print(length(H1N15[[1]]))
+print("Composicion de nucleotidos")
+print(count(H1N15[[1]],1))
+print("Contenido GC")
+print(GC(H1N15[[1]])*100)
+print("Secuencia")
+print(H1N15[[1]][c(1:10,(length(H1N15[[1]])-10):length(H1N15[[1]]))])
+print("Secuencia complementaria")
+print(comp(H1N15[[1]])[c(1:10,(length(H1N15[[1]])-10):length(H1N15[[1]]))])
+
+
+```
+
+NA
+```{r}
+H1N16 = read.fasta("H1N16.fasta")
+print("Tamaño de la secuencia")
+print(length(H1N16[[1]]))
+print("Composicion de nucleotidos")
+print(count(H1N16[[1]],1))
+print("Contenido GC")
+print(GC(H1N16[[1]])*100)
+print("Secuencia")
+print(H1N16[[1]][c(1:10,(length(H1N16[[1]])-10):length(H1N16[[1]]))])
+print("Secuencia complementaria")
+print(comp(H1N16[[1]])[c(1:10,(length(H1N16[[1]])-10):length(H1N16[[1]]))])
+
+
+```
+
+MP
+```{r}
+H1N17 = read.fasta("H1N17.fasta")
+print("Tamaño de la secuencia")
+print(length(H1N17[[1]]))
+print("Composicion de nucleotidos")
+print(count(H1N17[[1]],1))
+print("Contenido GC")
+print(GC(H1N17[[1]])*100)
+print("Secuencia")
+print(H1N17[[1]][c(1:10,(length(H1N17[[1]])-10):length(H1N17[[1]]))])
+print("Secuencia complementaria")
+print(comp(H1N17[[1]])[c(1:10,(length(H1N17[[1]])-10):length(H1N17[[1]]))])
+
+
+```
+
+NS
+```{r}
+H1N18 = read.fasta("H1N18.fasta")
+print("Tamaño de la secuencia")
+print(length(H1N18[[1]]))
+print("Composicion de nucleotidos")
+print(count(H1N18[[1]],1))
+print("Contenido GC")
+print(GC(H1N18[[1]])*100)
+print("Secuencia")
+print(H1N18[[1]][c(1:10,(length(H1N18[[1]])-10):length(H1N18[[1]]))])
+print("Secuencia complementaria")
+print(comp(H1N18[[1]])[c(1:10,(length(H1N18[[1]])-10):length(H1N18[[1]]))])
+
+
+```
+
+
+

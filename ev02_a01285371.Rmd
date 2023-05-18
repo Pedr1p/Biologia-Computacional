@@ -1,0 +1,276 @@
+---
+title: "ev02_a01285371"
+author: "Pedro Sotelo Arce"
+date: "2023-05-06"
+output:
+  word_document: default
+  html_document: default
+---
+Segun la OMS 
+Los 20 paises con mas casos reportados de COVID son
+
+    Estados Unidos MN985325
+    China MN908947
+    India MT012098
+    Francia MT320538
+    Alemania MT394864
+    Brazil MT126808
+    Japon LC529905
+    Korea MT039890
+    Italia MT066156
+    Reino unido LR813996
+    Russia MT510643
+    Turkia MT327745
+    España MT198651
+    Vietnam MT192772
+    Australia MT007544
+    Argentina MW553294
+    Paises Bajos MT396266
+    Iran MT281530
+    Mexico MT810752
+    Indonesia MZ026853
+
+    
+    
+```{r}
+virus <- c(  "MN985325", "MN908947", "MT012098", "MT320538", "MT394864" , "MT126808" , "LC529905", "MT039890" , "MT066156" , "LR813996" , "MT510643" , "MT327745" , "MT198651" , "MT192772" , "MT007544" , "MW553294" , "MT396266" , "MT281530" , "MT810752" , "MZ026853")
+
+```
+
+1. Carga las librerías necesarias:
+```{r}
+library(Biostrings)
+library(adegenet)
+library(ape)
+library(ggtree)
+library(DECIPHER)
+library(viridis)
+library(ggplot2)
+library(seqinr)
+
+```
+
+2. Obtén las secuencias:
+```{r}
+virus_sequences <- read.GenBank(virus)
+```
+
+3. Longitudes de los virus
+```{r}
+USA = read.fasta("USA.fasta")
+cat("Tamaño de la secuencia de USA: ",length(USA[[1]]))
+
+CHINA = read.fasta("CHINA.fasta")
+cat("Tamaño de la secuencia de CHINA: ",length(CHINA[[1]]))
+
+INDIA = read.fasta("INDIA.fasta")
+cat("Tamaño de la secuencia de INDIA: ",length(INDIA[[1]]))
+
+FRANCIA = read.fasta("FRANCIA.fasta")
+cat("Tamaño de la secuencia de FRANCIA: ",length(FRANCIA[[1]]))
+
+
+ALEMANIA = read.fasta("ALEMANIA.fasta")
+cat("Tamaño de la secuencia de ALEMANIA: ",length(ALEMANIA[[1]]))
+
+BRAZIL = read.fasta("BRAZIL.fasta")
+cat("Tamaño de la secuencia de BRAZIL: ",length(BRAZIL[[1]]))
+
+JAPON = read.fasta("JAPON.fasta")
+cat("Tamaño de la secuencia de JAPON: ", length(JAPON[[1]]))
+
+S_KOREA = read.fasta("S_KOREA.fasta")
+cat("Tamaño de la secuencia de KOREA: ", length(S_KOREA[[1]]))
+
+ITALIA = read.fasta("ITALIA.fasta")
+cat("Tamaño de la secuencia de ITALIA: ", length(ITALIA[[1]]))
+
+UK = read.fasta("UK.fasta")
+cat("Tamaño de la secuencia del REINO UNIDO: ", length(UK[[1]]))
+
+RUSSIA = read.fasta("RUSSIA.fasta")
+cat("Tamaño de la secuencia de RUSSIA: ", length(RUSSIA[[1]]))
+
+TURQUIA = read.fasta("TURQUIA.fasta")
+cat("Tamaño de la secuencia de TURQUIA: ", length(TURQUIA[[1]]))
+
+ESPANA = read.fasta("ESPANA.fasta")
+cat("Tamaño de la secuencia de ESPÁÑA: ", length(ESPANA[[1]]))
+
+VIETNAM = read.fasta("VIETNAM.fasta")
+cat("Tamaño de la secuencia de VIET NAM: ", length(VIETNAM[[1]]))
+
+AUSTRALIA = read.fasta("AUSTRALIA.fasta")
+cat("Tamaño de la secuencia de AUSTRALIA: ", length(AUSTRALIA[[1]]))
+
+ARGENTINA = read.fasta("ARGENTINA.fasta")
+cat("Tamaño de la secuencia de ARGENTINA: ", length(ARGENTINA[[1]]))
+
+NETHERLANDS = read.fasta("NETHERLANDS.fasta")
+cat("Tamaño de la secuencia de PAISES BAJOS: ", length(NETHERLANDS[[1]]))
+
+IRAN = read.fasta("IRAN.fasta")
+cat("Tamaño de la secuencia de IRAN: ", length(IRAN[[1]]))
+
+MEXICO = read.fasta("MEXICO.fasta")
+cat("Tamaño de la secuencia de MEXICO: ", length(MEXICO[[1]]))
+
+INDONESIA = read.fasta("INDONESIA.fasta")
+cat("Tamaño de la secuencia de INDONESIA: ", length(INDONESIA[[1]]))
+
+```
+
+4. Grafica de TODAS las variantes y sus bases de ADN
+Al ser 20, es dificil integrar los nombres o las labels dentro de la misma grafica.
+
+USA - blue
+China - red
+India - green
+Francia - orange
+Alemania - purple
+Brazil - pink
+Japon - black
+Corea del Sur - gray
+Italia - yellow
+Gran Bretaña - magenta
+Russia - gold
+Turquia - white
+España - brown
+Viet Nam - skyblue
+Australia - cyan
+Argentina - aquamarine
+Paises Bajos - hotpink
+Iran - beige
+Mexico - khaki4
+Indonesia - palegreen2
+
+Aqui esta un link de pdf si tiene algun inconveniente identificando colores
+http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+
+
+```{r}
+
+
+usa_count <- count(USA[[1]], 1)
+china_count <- count(CHINA[[1]], 1)
+india_count <- count(INDIA[[1]], 1)
+francia_count <- count(FRANCIA[[1]], 1)
+alemania_count <- count(ALEMANIA[[1]], 1)
+brazil_count <- count(BRAZIL[[1]], 1)
+japon_count <- count(JAPON[[1]], 1)
+corea_count <- count(S_KOREA[[1]], 1)
+italia_count <- count(ITALIA[[1]], 1)
+uk_count <- count(UK[[1]], 1)
+russia_count <- count(RUSSIA[[1]], 1)
+turquia_count <- count(TURQUIA[[1]], 1)
+espana_count <- count(ESPANA[[1]], 1)
+vietnam_count <- count(VIETNAM[[1]], 1)
+australia_count <- count(AUSTRALIA[[1]], 1)
+argentina_count <- count(ARGENTINA[[1]], 1)
+netherlands_count <- count(NETHERLANDS[[1]], 1)
+iran_count <- count(IRAN[[1]], 1)
+mexico_count <- count(MEXICO[[1]], 1)
+indonesia_count <- count(INDONESIA[[1]], 1)
+
+counts_matrix <- rbind(usa_count, china_count, india_count, francia_count, alemania_count, brazil_count, japon_count, corea_count, italia_count, uk_count, russia_count, turquia_count, espana_count, vietnam_count, australia_count, argentina_count, netherlands_count, iran_count, mexico_count, indonesia_count )
+barplot(counts_matrix, beside = TRUE, col = c("blue", "red", "green", "orange", "purple", "pink", "black", "grey", "yellow", "magenta","gold","white","brown","skyblue","cyan","aquamarine","hotpink","beige","khaki4","palegreen2"),
+        ylim = c(0, 10000))
+```
+
+5. Concentraremos en un archivo todas las secuencias:
+```{r}
+write.dna(virus_sequences,  file ="virus_seqs.fasta", format = "fasta", append =
+FALSE, nbcol = 6, colsep = " ", colw = 10)
+```
+
+6. Cargamos la secuencias:
+```{r}
+virus_seq_no_alineadas <- readDNAStringSet("virus_seqs.fasta", format = "fasta")
+```
+7. Alineamiento de las secuencias:
+
+```{r}
+virus_seq_no_alineadas <- OrientNucleotides(virus_seq_no_alineadas)
+
+virus_align_seqs <- AlignSeqs(virus_seq_no_alineadas)
+```
+
+8. Guardar el resultado:
+```{r}
+writeXStringSet(virus_align_seqs, file = "virus_align_seq.fasta")
+```
+
+9. Obtener el nuevo archivo:
+```{r}
+virus_aligned <- read.alignment("virus_align_seq.fasta", format = "fasta") 
+```
+
+10. Crear una matriz de distancia:
+```{r}
+matriz_distancia <- dist.alignment(virus_aligned, matrix = "similarity")
+```
+11. Visualiza la matriz de distancia: donde sombras más oscuras de gris significan una mayor distancia
+```{r}
+
+temp <- as.data.frame(as.matrix(matriz_distancia))
+
+```
+12. Creación del árbol con el paquete ape:
+```{r}
+virus_filogenetico <- nj(matriz_distancia)
+class(virus_filogenetico)
+new_names = c("USA","CHN","IND","FRA","DEU","BRA","JPN","KOR","ITA","GBR","RUS","TUR","ESP","VNM","AUS","ARG","NDL","IRA","MEX","IDN")
+virus_filogenetico$tip.label = new_names
+```
+
+13. Plot del árbol:
+```{r}
+
+
+virus_plot_filogenetico <- ladderize(virus_filogenetico)
+ggtree(virus_plot_filogenetico) +
+  geom_tiplab(size = 3) +
+  theme_tree2() +
+  theme(legend.position = "none", text = element_text(size = 6)) +
+  ggtitle("SARS-CoV-2 en los 20 países con más casos reportados")
+
+
+```
+
+
+14. Referencias
+```{r}
+citation("Biostrings")
+citation("adegenet")
+citation("ape")
+citation("ggtree")
+citation("DECIPHER")
+citation("viridis")
+citation("ggplot2")
+citation("seqinr")
+
+
+```
+
+Interpretación de las gráficas y conclusiones:
+
+La gráfica de las bases de ADN es un poco complicada de analizar debido a la gran concentración de datos en un espacio reducido, pero funciona para comprobar las similitudes de las 20 variantes de COVID en los 20 países con más casos reportados. Todas tienen casi la misma composición, es decir, no hay ninguna sola que varíe notablemente, todas van más o menos a la par con una tendencia grande a "(A y T)", llegando la mayoría a los 10,000, componiendo 1/3 o en este caso 2/3 del total del ADN. En promedio, las secuencias tenían una longitud de 29,000, lo que implica que este tipo de cadenas son ricas en pares adenina-timina. Lo mencioné en mi evidencia 01 y, aun con más datos y variantes, la tendencia a los grupos de adenina-timina es notable y es similar a lo largo de todas las variantes.
+
+Podemos observar que en longitud todas las secuencias son de tamaño similar, rondando los 29,500 más o menos. Hay algunas que casi llegan a los 30 y otras más cerca de los 28, pero es normal ya que estas son mutaciones de un virus, por lo que en esencia son el mismo virus, pero con pequeños cambios de nucleótidos dentro de sus genomas. Esto no necesariamente indica que provoquen diferentes síntomas ni nada, pero tienen diferentes cualidades que a simple vista no se ven. A la hora de analizar, nos podemos dar cuenta de que sí son diferentes, aunque no sea la cosa más notable del mundo.
+
+Esto se puede ver en el árbol filogenético ordenado por países. Podemos ver que todos son similares, aunque hay ciertos grupos que se parecen más entre ellos. Hay que tener en cuenta que estos datos son los primeros genomas completos de variantes de COVID descubiertos en cada país de los 20 de la lista. Por ejemplo, podemos observar que las variantes de Vietnam, China y Japón son bastante similares. Esto nos indica que puede que la variante de China haya mutado y se haya esparcido por Asia. Al mutar, se generaron estas variantes tanto en Vietnam como en Japón con composiciones MUY similares. Otra cosa a notar es que la variante de Corea del Sur es una de las que más diferencias presenta con respecto a las demás, y eso que está dentro del continente asiático al igual que las mencionadas previamente. Las variantes de Indonesia y Argentina también se separan notablemente de los grupos respectivos a los que pertenecen. Esto nos puede decir una variedad de cosas, pero principalmente que son los que presentan más diferencias dentro de sus genomas. Realmente es muy interesante observar un árbol filogenético. Es una visual realmente simple, solo son líneas con nombres, pero la información que puedes obtener es muchísima. Es muy interesante ver las similitudes, las diferencias y pensar y analizar más a profundidad el porqué de las mismas. Eso no es algo que vaya a realizar en esta evidencia, es algo que me gustaría realizar en el futuro. Me gustó mucho trabajar con R a lo largo de este periodo y siento que aprendí muchísimo
+
+Referencias de la investigacion
+https://covid19.who.int/table 
+https://pubmed.ncbi.nlm.nih.gov/
+https://www.datosmundial.com/codigos-de-pais.php
+Zhou P, Yang XL, Wang XG, et al. A pneumonia outbreak associated with a new coronavirus of probable bat origin. Nature. 2020 Mar;579(7798):270-273. doi: 10.1038/s41586-020-2012-7.
+
+Wang M, Yan M, Xu H, et al. SARS-CoV infection in a restaurant from palm civet. Emerg Infect Dis. 2005 Apr;11(4):1860-5. doi: 10.3201/eid1112.041293.
+
+Zhou, P., Yang, X. L., Wang, X. G., Hu, B., Zhang, L., Zhang, W., ... & Chen, H. D. (2020). A pneumonia outbreak associated with a new coronavirus of probable bat origin. Nature, 579(7798), 270-273
+
+Lam, T. T., Shum, M. H., Zhu, H. C., Tong, Y. G., Ni, X. B., Liao, Y. S., ... & Cheng, S. H. (2020). Identification of 2019-nCoV related coronaviruses in Malayan pangolins in southern China. BioRxiv, 2020.
+
+
+
